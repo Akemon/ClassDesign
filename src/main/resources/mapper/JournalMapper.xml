@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classDesign.dao.JournalMapper">
+  <resultMap id="BaseResultMap" type="com.classDesign.bean.Journal">
+    <id column="journal_id" jdbcType="INTEGER" property="journalId" />
+    <result column="journal_userID" jdbcType="INTEGER" property="journalUserid" />
+    <result column="journal_title" jdbcType="VARCHAR" property="journalTitle" />
+    <result column="journal_content" jdbcType="VARCHAR" property="journalContent" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    journal_id, journal_userID, journal_title, journal_content, publish_time
+  </sql>
+  <select id="selectByExample" parameterType="com.classDesign.bean.JournalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from journal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from journal
+    where journal_id = #{journalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from journal
+    where journal_id = #{journalId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.classDesign.bean.JournalExample">
+    delete from journal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.classDesign.bean.Journal">
+    insert into journal (journal_id, journal_userID, journal_title, 
+      journal_content, publish_time)
+    values (#{journalId,jdbcType=INTEGER}, #{journalUserid,jdbcType=INTEGER}, #{journalTitle,jdbcType=VARCHAR}, 
+      #{journalContent,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.classDesign.bean.Journal">
+    insert into journal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="journalId != null">
+        journal_id,
+      </if>
+      <if test="journalUserid != null">
+        journal_userID,
+      </if>
+      <if test="journalTitle != null">
+        journal_title,
+      </if>
+      <if test="journalContent != null">
+        journal_content,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="journalId != null">
+        #{journalId,jdbcType=INTEGER},
+      </if>
+      <if test="journalUserid != null">
+        #{journalUserid,jdbcType=INTEGER},
+      </if>
+      <if test="journalTitle != null">
+        #{journalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="journalContent != null">
+        #{journalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.classDesign.bean.JournalExample" resultType="java.lang.Long">
+    select count(*) from journal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update journal
+    <set>
+      <if test="record.journalId != null">
+        journal_id = #{record.journalId,jdbcType=INTEGER},
+      </if>
+      <if test="record.journalUserid != null">
+        journal_userID = #{record.journalUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.journalTitle != null">
+        journal_title = #{record.journalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.journalContent != null">
+        journal_content = #{record.journalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishTime != null">
+        publish_time = #{record.publishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update journal
+    set journal_id = #{record.journalId,jdbcType=INTEGER},
+      journal_userID = #{record.journalUserid,jdbcType=INTEGER},
+      journal_title = #{record.journalTitle,jdbcType=VARCHAR},
+      journal_content = #{record.journalContent,jdbcType=VARCHAR},
+      publish_time = #{record.publishTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.classDesign.bean.Journal">
+    update journal
+    <set>
+      <if test="journalUserid != null">
+        journal_userID = #{journalUserid,jdbcType=INTEGER},
+      </if>
+      <if test="journalTitle != null">
+        journal_title = #{journalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="journalContent != null">
+        journal_content = #{journalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where journal_id = #{journalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.classDesign.bean.Journal">
+    update journal
+    set journal_userID = #{journalUserid,jdbcType=INTEGER},
+      journal_title = #{journalTitle,jdbcType=VARCHAR},
+      journal_content = #{journalContent,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP}
+    where journal_id = #{journalId,jdbcType=INTEGER}
+  </update>
+</mapper>
