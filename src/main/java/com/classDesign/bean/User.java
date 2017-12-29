@@ -1,11 +1,29 @@
 package com.classDesign.bean;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+
 public class User {
     private Integer userId;
 
+    @NotBlank(message = "用户名不能为空")
+    @NotNull(message = "用户名不能为空")
     private String username;
 
+    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能空")
     private String userpass;
+
+    public User(Integer userId, String username, String userpass, Integer province) {
+        this.userId = userId;
+        this.username = username;
+        this.userpass = userpass;
+        this.province = province;
+    }
+
+    public User() {
+    }
 
     private Integer province;
 

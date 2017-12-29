@@ -9,10 +9,34 @@ public class UserService {
     @Autowired
     public UserMapper userMapper;
 
+    /**
+     * 用户登陆
+     * @param userName 用户名
+     * @param userPass 密码
+     * @return
+     */
+
     public boolean userLogin(String userName,String userPass){
         if(userMapper.userLogin(userName,userPass)!=null) return true;
         return false;
     }
+
+    /**
+     * 用户注册
+     * @param user 用户对象
+     * @return
+     */
+    public boolean userRegister(User user){
+        userMapper.userRegister(user);
+        return true;
+    }
+
+    public boolean checkUser(User user){
+        //用户名已存在
+        if(userMapper.checkUser(user)!=null) return false;
+        return true;
+    }
+
     public User selectOneUser(int id){
         return userMapper.selectByPrimaryKey(id);
     }
