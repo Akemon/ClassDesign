@@ -49,6 +49,17 @@ public class Journal {
         return publishTime;
     }
 
+    public Journal() {
+    }
+
+    public Journal(Integer journalId, Integer journalUserid, String journalTitle, String journalContent, Date publishTime) {
+        this.journalId = journalId;
+        this.journalUserid = journalUserid;
+        this.journalTitle = journalTitle;
+        this.journalContent = journalContent;
+        this.publishTime = publishTime;
+    }
+
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
     }

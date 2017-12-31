@@ -21,4 +21,11 @@ public class JournalController {
     public Message getAllJournalByUserID(Journal journal){
         return Message.success().add("result",journalService.getAllJournal(journal.getJournalUserid()));
     }
+
+    @RequestMapping("/publishJournal")
+    @ResponseBody
+    public Message publicshJournal(Journal journal){
+        journalService.publishJournal(journal);
+        return Message.success();
+    }
 }

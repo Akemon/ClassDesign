@@ -4,6 +4,7 @@ import com.classDesign.bean.Journal;
 import com.classDesign.bean.JournalExample;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +31,5 @@ public interface JournalMapper {
     int updateByPrimaryKeySelective(Journal record);
 
     int updateByPrimaryKey(Journal record);
+
 }
