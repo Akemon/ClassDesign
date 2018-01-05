@@ -3,6 +3,7 @@ package com.classDesign.bean;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class User {
     private Integer userId;
@@ -14,6 +15,19 @@ public class User {
     @NotNull(message = "密码不能为空")
     @NotBlank(message = "密码不能空")
     private String userpass;
+
+    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能空")
+    @Pattern(regexp = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$",message = "邮箱格式不正确")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public User(Integer userId, String username, String userpass, Integer province) {
         this.userId = userId;

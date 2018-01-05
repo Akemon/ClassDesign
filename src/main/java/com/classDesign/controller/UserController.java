@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -26,15 +27,18 @@ public class UserController {
 
     @RequestMapping("/userLogin")
     @ResponseBody
-    public Message userLogin(HttpServletRequest request, @Valid User user, BindingResult result){
-        if(result.hasErrors()) return Message.fail();
+    public Message userLogin(HttpServletRequest request, HttpServletResponse response, User user){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        System.out.println(user.getUsername());
+        System.out.println(user.getUserpass());
         if(userService.userLogin(user.getUsername(),user.getUserpass())) return Message.success();
         return Message.fail();
     }
 
     @RequestMapping("/userRegister")
     @ResponseBody
-    public Message userRegister(HttpServletRequest request, @Valid User user, BindingResult result){
+    public Message userRegister(HttpServletRequest request,HttpServletResponse response, @Valid User user, BindingResult result){
+        response.addHeader("Access-Control-Allow-Origin", "*");
         //输入数据是否有误
         if(result.hasErrors()){
             //保存错误信息

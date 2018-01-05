@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @EnableAutoConfiguration
 public class ProvinceController {
@@ -18,8 +20,9 @@ public class ProvinceController {
 
     @RequestMapping("/getAllProvinceAndPeople")
     @ResponseBody
-    public Message getAllProvinceAndPeople(){
-        return Message.success().add("result",provinceService.getAllProvinceAndPeople());
+    public Message getAllProvinceAndPeople(HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        return Message.success().add("provinceList",provinceService.getAllProvinceAndPeople());
     }
 
 }

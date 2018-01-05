@@ -36,7 +36,7 @@ public interface UserMapper {
     User userLogin(@Param("userName") String userName,@Param("userPass") String userPass);
 
     //用户注册
-    @Insert("insert into user(userName,userPass,province) values(#{username},#{userpass},#{province})")
+    @Insert("insert into user(userName,userPass,province,email) values(#{username},#{userpass},#{province},#{email})")
     void userRegister(User user);
 
     //查看某个用户名是否存在

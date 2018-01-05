@@ -11,7 +11,8 @@ public class TestController1 {
 
     @RequestMapping("/hk1")
     public String  hkTest(){
-        return "Hello hk1!!!";
+        return "Hello hfgk1!!!";
+
     }
 
 }

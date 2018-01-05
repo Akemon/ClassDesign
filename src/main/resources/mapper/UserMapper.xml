@@ -5,6 +5,7 @@
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="userPass" jdbcType="VARCHAR" property="userpass" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="province" jdbcType="INTEGER" property="province" />
   </resultMap>
   <sql id="Example_Where_Clause">
