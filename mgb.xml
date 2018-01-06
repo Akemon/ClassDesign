@@ -35,8 +35,9 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="journal" domainObjectName="Journal"></table>
-        <table tableName="province" domainObjectName="Province"></table>
-        <table tableName="user" domainObjectName="User"></table>
+        <!--<table tableName="journal" domainObjectName="Journal"></table>-->
+        <!--<table tableName="province" domainObjectName="Province"></table>-->
+        <!--<table tableName="user" domainObjectName="User"></table>-->
+        <table tableName="leaveMessage" domainObjectName="LeaveMessage"></table>
     </context>
 </generatorConfiguration>
