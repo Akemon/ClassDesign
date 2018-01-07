@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.websocket.Session;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,11 @@ public class UserController {
         response.addHeader("Access-Control-Allow-Origin", "*");
         System.out.println(user.getUsername());
         System.out.println(user.getUserpass());
-        if(userService.userLogin(user.getUsername(),user.getUserpass())) return Message.success();
+        if(userService.userLogin(user.getUsername(),user.getUserpass())) {
+            HttpSession session =request.getSession();
+            session.setAttribute("userName",user.getUsername());
+            return Message.success();
+        }
         return Message.fail();
     }
 
@@ -61,6 +67,13 @@ public class UserController {
 
         }
 
+    }
+
+    @RequestMapping("/getAllUsers")
+    @ResponseBody
+    public Message getAllUsers(HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        return Message.success().add("users",userService.getAllUser());
     }
 
 
